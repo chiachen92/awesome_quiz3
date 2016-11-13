@@ -1,0 +1,11 @@
+<h1>List of all Ideas</h1>
+
+<div>
+  <% @ideas.each do |x| %>
+  <div>
+    <h2><%= x.title %></h2>
+    <p><%= x.body %></p>
+    <hr>
+  </div>
+  <% end %>
+</div>
