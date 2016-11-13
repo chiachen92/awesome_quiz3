@@ -1,0 +1,12 @@
+<h3>Show one idea</h3>
+
+<div>
+Title : <%= @idea.title %> <br>
+Body: <%= @idea.body %><br>
+
+<%= link_to "Edit", edit_idea_path(@idea) %>
+<%= link_to "Delete", idea_path(@idea),
+                      method: :delete,
+                      data: {confirm: "Are you sure?"} %>
+</div>
+<hr>

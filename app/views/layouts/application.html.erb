@@ -9,6 +9,10 @@
   </head>
 
   <body>
+    <nav>
+    <%= link_to "New Ideas", new_idea_path %> |
+    <%= link_to "List of Ideas", root_path %> |
+    </nav>
     <%= yield %>
   </body>
 </html>
