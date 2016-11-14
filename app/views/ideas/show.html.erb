@@ -4,11 +4,25 @@
 Title : <%= @idea.title %> <br>
 Body: <%= @idea.body %><br>
 
+<h4>Members</h4>
+<ul>
+  <%@idea.memberships.each do |user|%>
+  <li><%= user.name %></li>
+  <% end %>
+
+
+</ul>
+
+
 <%= link_to "Edit", edit_idea_path(@idea) %>
 <%= link_to "Delete", idea_path(@idea),
                       method: :delete,
                       data: {confirm: "Are you sure?"} %>
 created by: <%= @idea.user.name %>
+
+<br>
+
+(<%= pluralize(@idea.likes.count, "like") %>)
 
 </div>
 <hr>
