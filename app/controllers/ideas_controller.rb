@@ -11,7 +11,10 @@ class IdeasController < ApplicationController
   end
 
   def create
+    # just before we save we want to add the current user id to the idea
+
     @idea = Idea.new idea_params
+    @idea.user = current_user
     if @idea.save
       redirect_to idea_path(@idea), notice: "New Idea Created"
     else
@@ -41,7 +44,7 @@ class IdeasController < ApplicationController
   def destroy
     @idea.destroy
     redirect_to root_path
-    
+
   end
 
   private

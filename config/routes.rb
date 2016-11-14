@@ -3,5 +3,13 @@ Rails.application.routes.draw do
 
   root 'ideas#index'
 
-  resources :ideas 
+  resources :ideas
+
+  resources :users
+
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
+  end
+
+  
 end
