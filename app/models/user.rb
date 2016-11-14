@@ -2,7 +2,11 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  has_many :ideas
+  has_many :ideas, dependent: :destroy
+
+  has_many :like, dependent: :destroy
+
+  has_many :liked_ideas, through: :likes, source: :idea
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: {case_sensitive: false}
