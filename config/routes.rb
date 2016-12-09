@@ -8,7 +8,10 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy], shallow: true
 
     resources :members, only: [:create, :destroy], shallow: true
+
+    resources :comments, only: [:create, :destroy], shallow: true
   end
+  
 
   resources :users
 

@@ -1,0 +1,12 @@
+<h2>Make a comment</h2>
+<%= form_for [@idea, @comment] do |r|%>
+
+<%#=this form is getting rendered from the idea/show.html.erb, the comment is going to be displayed on the idea show page %>
+<%#=@idea, @comment is from nested routes and @idea @comment is defined in the show page   def find_idea
+    @idea = Idea.find params[:id]
+  end is defined in the idea controller show action %>
+ <div>
+   <%= r.text_area :body %>
+ </div>
+ <%= r.submit "Comment it!"%>
+<% end %>

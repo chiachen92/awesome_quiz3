@@ -5,6 +5,7 @@
   <div>
     <h2><%= link_to x.title, idea_path(x) %></h2>
     <p><%= x.body %></p>
+    <% if can?(:like, x) %>
     <% like = x.like_for(current_user) %>
     <%#=checks ideas likes and see if current_user is in there and if it is then they can unlike it  %>
     <% if like != nil%>
@@ -13,12 +14,15 @@
     <%= link_to "Like", idea_likes_path(x), method: :post %>
 
     <% end %>
+    <% end %>
 
+    <% if can?(:join, x) %>
     <% member = x.membership_for(current_user) %>
     <% if member != nil %>
     <%= link_to "UnJoin", member_path(member), method: :delete %>
     <% else %>
     <%= link_to "Join", idea_members_path(x), method: :post  %>
+    <% end %>
     <% end %>
     (<%= pluralize(x.likes.count, "like") %>)
 

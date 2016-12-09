@@ -3,6 +3,7 @@ class MembersController < ApplicationController
   def create
     @member = Member.new
     @idea = Idea.find params[:idea_id]
+
     # :idea_id because it's nested routes
     @user = current_user
     @member.idea_id = @idea.id
@@ -12,7 +13,7 @@ class MembersController < ApplicationController
     # @member.user = current_user
     # setting two columns in members record to idea and user ids
 
-    if @member.save
+    if can?(:join, @idea) && @member.save
       redirect_to root_path
     else
       flash[:alert] = "failed to join"
@@ -22,8 +23,13 @@ class MembersController < ApplicationController
 
   def destroy
     @member = Member.find params[:id]
-    @member.destroy
-    redirect_to root_path
+    @idea = @member.idea
+    if can?(:join, @idea) && @member.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path, alert: "unauthorized access"
+    end
+
   end
 
 end

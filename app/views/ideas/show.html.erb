@@ -1,8 +1,42 @@
 <h3>Show one idea</h3>
+<%#= I D E A controller show action!!!! need to define variables  %>
 
 <div>
 Title : <%= @idea.title %> <br>
 Body: <%= @idea.body %><br>
+
+<% if user_signed_in? %>
+<div>
+  <%= render "comments/commentform" %>
+
+  <%#=this form is getting rendered from the show.html.erb  %>
+</div>
+<hr>
+<%#= do i want the hr to show up on each like if so have it inside a loop  %>
+<% end %>
+
+<br>
+
+
+<div>
+
+<h4>Comments</h4>
+  <% @comments = @idea.comments %>
+  <%#=@idea.comments will generate a list of comment can call this method because of the model association belongs to and has many  %>
+  <% @comments.each do |x| %>
+  <p>
+    Posted By:<%= x.user.name %><br>
+    Comment:<%= x.body %>
+    <% if can?(:delete_comment, x)%><br>
+      <button> <%= link_to "Delete", comment_path(x), method: :delete %></button>
+    <% end %>
+  </p>
+
+
+  <% end %>
+</div>
+<hr>
+
 
 <h4>Members</h4>
 <ul>
@@ -13,16 +47,19 @@ Body: <%= @idea.body %><br>
 
 </ul>
 
-
+<% if can?(:edit_delete, @idea) %>
 <%= link_to "Edit", edit_idea_path(@idea) %>
 <%= link_to "Delete", idea_path(@idea),
                       method: :delete,
                       data: {confirm: "Are you sure?"} %>
 created by: <%= @idea.user.name %>
+<% end %>
 
 <br>
 
 (<%= pluralize(@idea.likes.count, "like") %>)
 
 </div>
+
+
 <hr>

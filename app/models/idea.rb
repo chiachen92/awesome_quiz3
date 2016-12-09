@@ -8,6 +8,7 @@ class Idea < ApplicationRecord
   has_many :members, dependent: :destroy
 
   has_many :memberships, through: :members, source: :user
+  has_many :comments, dependent: :destroy
   # @idea.membership should give us a list of users
   # in idea and want to list the user that are members
 
